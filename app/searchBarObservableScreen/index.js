@@ -1,26 +1,41 @@
 // @flow
 
 import {FlatList, Text} from 'react-native';
-import {Subject} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {Subject, asyncScheduler} from 'rxjs';
+import * as RxOperations from 'rxjs/operators';
 import React, {useState} from 'react';
 
 import {searchTextObservable} from '../services/doSomethingObservable';
-import SearchBar from './SearchBarComponent';
+import SearchBar from '../components/SearchBar';
 
 const SearchBarScreen = (props: {}) => {
   const [items, setItems] = useState([]);
 
   var textSubject = new Subject();
   textSubject
-    .pipe(
-      switchMap((value, index) => {
-        return searchTextObservable(value);
-      }),
-    )
+    //3 throttleTime
+    // .pipe(
+    //   RxOperations.throttleTime(500, asyncScheduler, {
+    //     leading: true,
+    //     trailing: true,
+    //   }),
+    // )
+    // //1 with flatMap
+    // .pipe(
+    //   RxOperations.flatMap((value, index) => {
+    //     return searchTextObservable(value);
+    //   }),
+    // )
+    // // 2 switchMap
+    // .pipe(
+    //   RxOperations.switchMap((value, index) => {
+    //     return searchTextObservable(value);
+    //   }),
+    // )
     .subscribe(data => {
       setItems(data);
     });
+
   return (
     <>
       <SearchBar
@@ -29,6 +44,7 @@ const SearchBarScreen = (props: {}) => {
         }}
       />
       <FlatList
+        keyExtractor={({item, index}) => item}
         data={items}
         renderItem={({item, index, separators}) => {
           return <Text>{item} </Text>;
