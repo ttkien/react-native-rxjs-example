@@ -26,12 +26,12 @@ const SearchBarScreen = (props: {}) => {
     //     return searchTextObservable(value);
     //   }),
     // )
-    // // 2 switchMap
-    // .pipe(
-    //   RxOperations.switchMap((value, index) => {
-    //     return searchTextObservable(value);
-    //   }),
-    // )
+    // 2 switchMap
+    .pipe(
+      RxOperations.switchMap((value, index) => {
+        return searchTextObservable(value);
+      }),
+    )
     .subscribe(data => {
       setItems(data);
     });
