@@ -10,7 +10,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {SafeAreaView, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import React from 'react';
 
-import SearchBarScreen from './app/searchBarScreen';
+import ABTasks from './app/ABTasks';
 
 const App: () => React$Node = () => {
   return (
@@ -20,7 +20,7 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <SearchBarScreen />
+          <ABTasks />
         </ScrollView>
       </SafeAreaView>
     </>
