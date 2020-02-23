@@ -2,7 +2,7 @@ import {FlatList, Text} from 'react-native';
 import React, {useState} from 'react';
 
 import {searchText} from '../services/doSomeThing';
-import SearchBar from './SearchBarComponent';
+import SearchBar from '../components/SearchBar';
 
 const SearchBarScreen = (props: {}) => {
   const [items, setItems] = useState([]);
