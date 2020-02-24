@@ -12,6 +12,8 @@ const SearchBar = (props: {onChangeText: string => void}) => {
         style={{
           height: 30,
           margin: 30,
+          borderColor: 'gray',
+          borderWidth: 1,
         }}
         onChangeText={text => {
           props.onTextChange(text);

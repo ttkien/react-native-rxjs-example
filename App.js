@@ -10,17 +10,23 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {SafeAreaView, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import React from 'react';
 
-import ABTasks from './app/ABTasks';
+import SearchBarScreen from './app/searchBarScreen';
+
+type DemoType = 'SEARCH_BAR' | 'SEARCH_BAR_OBSERVABLE' | 'ABTASK';
+import SearchBarObservableScreen from './app/searchBarObservableScreen';
 
 const App: () => React$Node = () => {
+  const demo: DemoType = 'SEARCH_BAR';
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
+          backgroundColor="gray"
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <ABTasks />
+          {demo === 'SEARCH_BAR' && <SearchBarScreen />}
+          {demo === 'SEARCH_BAR_OBSERVABLE' && <SearchBarObservableScreen />}
         </ScrollView>
       </SafeAreaView>
     </>
