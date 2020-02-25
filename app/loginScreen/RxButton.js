@@ -10,11 +10,12 @@ const RxButton = ({
   onPressObsevable: Observable<{}>,
   disableObservable: Observable<boolean>,
 }) => {
-  const behaviourSubject = new Subject();
   const [disabled, setDisabled] = useState(props.disabled || false);
+  const [onPressSubject, setOnPressSubject] = useState(new Subject());
   useEffect(() => {
+    const behaviourSubjectObservable = onPressSubject.asObservable();
+    onPressObsevable(onPressSubject);
     disableObservable.subscribe(disabled => setDisabled(disabled));
-    onPressObsevable(behaviourSubject.asObservable());
     return () => {};
   });
   return (

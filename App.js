@@ -8,7 +8,11 @@ import ABTasks from './app/ABTasks';
 import LoginScreen from './app/loginScreen';
 import SearchBarScreen from './app/searchBarScreen';
 
-type DemoType = 'SEARCH_BAR' | 'SEARCH_BAR_OBSERVABLE' | 'ABTASK';
+type DemoType =
+  | 'SEARCH_BAR'
+  | 'SEARCH_BAR_OBSERVABLE'
+  | 'ABTASK'
+  | 'LOGIN_FORM';
 import SearchBarObservableScreen from './app/searchBarObservableScreen';
 
 const App: () => React$Node = () => {
@@ -23,8 +27,7 @@ const App: () => React$Node = () => {
           {demo == 'SEARCH_BAR' && <SearchBarScreen />}
           {demo == 'SEARCH_BAR_OBSERVABLE' && <SearchBarObservableScreen />}
           {demo == 'ABTASK' && <ABTasks studentID="1990" classID="classID" />}
-
-          <LoginScreen />
+          {demo == 'LOGIN_FORM' && <LoginScreen />}
         </ScrollView>
       </SafeAreaView>
     </>
