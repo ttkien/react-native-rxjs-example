@@ -1,18 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+// @flow
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {SafeAreaView, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import React from 'react';
 
+import ABTasks from './app/ABTasks';
+import LoginScreen from './app/loginScreen';
 import SearchBarScreen from './app/searchBarScreen';
 
-type DemoType = 'SEARCH_BAR' | 'SEARCH_BAR_OBSERVABLE' | 'ABTASK';
+type DemoType =
+  | 'SEARCH_BAR'
+  | 'SEARCH_BAR_OBSERVABLE'
+  | 'ABTASK'
+  | 'LOGIN_FORM';
 import SearchBarObservableScreen from './app/searchBarObservableScreen';
 
 const App: () => React$Node = () => {
@@ -22,11 +22,12 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
-          backgroundColor="gray"
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          {demo === 'SEARCH_BAR' && <SearchBarScreen />}
-          {demo === 'SEARCH_BAR_OBSERVABLE' && <SearchBarObservableScreen />}
+          {demo == 'SEARCH_BAR' && <SearchBarScreen />}
+          {demo == 'SEARCH_BAR_OBSERVABLE' && <SearchBarObservableScreen />}
+          {demo == 'ABTASK' && <ABTasks studentID="1990" classID="classID" />}
+          {demo == 'LOGIN_FORM' && <LoginScreen />}
         </ScrollView>
       </SafeAreaView>
     </>
