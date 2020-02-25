@@ -16,7 +16,7 @@ const SearchBar = (props: {onChangeText: string => void}) => {
           borderWidth: 1,
         }}
         onChangeText={text => {
-          props.onTextChange(text);
+          props.onChangeText(text);
           setText(text);
         }}
       />

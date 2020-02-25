@@ -10,7 +10,7 @@ const SearchBarScreen = (props: {}) => {
   return (
     <>
       <SearchBar
-        onTextChange={text => {
+        onChangeText={text => {
           searchText(text, data => {
             setItems(data);
           });

@@ -19,4 +19,4 @@ const loginObservable = (
   );
 };
 
-export {loginObservable};
+export default loginObservable;
