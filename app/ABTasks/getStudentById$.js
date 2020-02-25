@@ -15,4 +15,4 @@ const getStudentByIdObservable = (id: string): Observable<StudentType> => {
   );
 };
 
-export {getStudentByIdObservable};
+export default getStudentByIdObservable;

@@ -6,15 +6,15 @@ import React, {useEffect, useState} from 'react';
 
 const RxTextInput = ({
   value,
-  textObservable,
+  text$,
   ...props
 }: {
   value: string,
-  textObservable: (Observable<string>) => void,
+  text$: (Observable<string>) => void,
 }) => {
   const behaviourSubject = new BehaviorSubject('');
   useEffect(() => {
-    textObservable(behaviourSubject.asObservable());
+    text$(behaviourSubject.asObservable());
     return () => {};
   });
   return (

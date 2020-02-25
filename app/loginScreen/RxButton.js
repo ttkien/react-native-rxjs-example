@@ -3,25 +3,25 @@ import {Observable, Subject} from 'rxjs';
 import React, {useEffect, useState} from 'react';
 
 const RxButton = ({
-  disableObservable,
-  onPressObsevable,
+  disable$,
+  onPress$,
   ...props
 }: {
-  onPressObsevable: Observable<{}>,
-  disableObservable: Observable<boolean>,
+  onPress$: Observable<{}>,
+  disable$: Observable<boolean>,
 }) => {
   const [disabled, setDisabled] = useState(props.disabled || false);
-  const [onPressSubject, setOnPressSubject] = useState(new Subject());
+  const [onPressSubject$, setOnPressSubject] = useState(new Subject());
   useEffect(() => {
-    const behaviourSubjectObservable = onPressSubject.asObservable();
-    onPressObsevable(onPressSubject);
-    disableObservable.subscribe(disabled => setDisabled(disabled));
+    const behaviourSubject$ = onPressSubject$.asObservable();
+    onPress$(onPressSubject$);
+    disable$.subscribe(disabled => setDisabled(disabled));
     return () => {};
   });
   return (
     <Button
       onPress={() => {
-        behaviourSubject.next({});
+        onPressSubject$.next({});
       }}
       {...props}
       disabled={disabled}

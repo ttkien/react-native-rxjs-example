@@ -1,11 +1,11 @@
 // @flow
 
 import {FlatList, Text} from 'react-native';
-import {Subject, asyncScheduler} from 'rxjs';
-import * as RxOperations from 'rxjs/operators';
+import {Subject} from 'rxjs';
 import React, {useState} from 'react';
+import * as RxOperations from 'rxjs/operators';
 
-import {searchTextObservable} from '../services/doSomethingObservable';
+import {searchText$} from '../services/doSomething$';
 import SearchBar from '../components/SearchBar';
 
 const SearchBarScreen = (props: {}) => {
@@ -13,6 +13,8 @@ const SearchBarScreen = (props: {}) => {
 
   var textSubject = new Subject();
   textSubject
+    //4 retry
+    // .pipe(RxOperations.retry(3))
     //3 throttleTime
     // .pipe(
     //   RxOperations.throttleTime(500, asyncScheduler, {
@@ -20,18 +22,18 @@ const SearchBarScreen = (props: {}) => {
     //     trailing: true,
     //   }),
     // )
-    // //1 with flatMap
-    // .pipe(
-    //   RxOperations.flatMap((value, index) => {
-    //     return searchTextObservable(value);
-    //   }),
-    // )
-    // 2 switchMap
+    //1 with flatMap
     .pipe(
-      RxOperations.switchMap((value, index) => {
-        return searchTextObservable(value);
+      RxOperations.flatMap((value, index) => {
+        return searchText$(value);
       }),
     )
+    // 2 switchMap
+    // .pipe(
+    // RxOperations.switchMap((value, index) => {
+    // return searchText$(value);
+    // }),
+    // )
     .subscribe(data => {
       setItems(data);
     });
@@ -39,7 +41,7 @@ const SearchBarScreen = (props: {}) => {
   return (
     <>
       <SearchBar
-        onTextChange={text => {
+        onChangeText={text => {
           textSubject.next(text);
         }}
       />

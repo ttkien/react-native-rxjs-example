@@ -15,4 +15,4 @@ const getClassByIdObservable = (id: string): Observable<ClassType> => {
   );
 };
 
-export {getClassByIdObservable};
+export default getClassByIdObservable;

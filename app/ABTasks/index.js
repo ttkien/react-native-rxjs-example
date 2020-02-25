@@ -3,10 +3,10 @@ import {Text} from 'react-native';
 import {zip} from 'rxjs';
 import React, {useState, useEffect} from 'react';
 
-import {getClassByIdObservable} from './getClassByIdObservable';
-import {getStudentByIdObservable} from './getStudentByIdObservable';
 import type ClassType from './ClassType';
 import type StudentType from './StudentType';
+import getClassById$ from './getClassById$';
+import getStudentById$ from './getStudentById$';
 
 const ABTasks = ({
   studentID = 'default',
@@ -21,15 +21,17 @@ const ABTasks = ({
   const [classA, setClass] = useState<?ClassType>(null);
 
   useEffect(() => {
-    zip(
-      getStudentByIdObservable(studentID),
-      getClassByIdObservable(classID),
+    const disposable = zip(
+      getStudentById$(studentID),
+      getClassById$(classID),
     ).subscribe(value => {
       setStudent(value[0]);
       setClass(value[1]);
       setFinishingTime(new Date());
     });
-    return () => {};
+    return () => {
+      disposable.unsubscribe();
+    };
   });
 
   if (!finishingTime) {
@@ -39,7 +41,7 @@ const ABTasks = ({
   const time = finishingTime.getTime() - startLoadingTime.getTime();
   return (
     <>
-      <Text> {time} </Text>
+      <Text>finish 2 task in {time} miliseconds </Text>
       <Text> {'Student ' + student.name} </Text>
       <Text> {'Class ' + classA.name} </Text>
     </>

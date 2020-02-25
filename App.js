@@ -16,7 +16,7 @@ type DemoType =
 import SearchBarObservableScreen from './app/searchBarObservableScreen';
 
 const App: () => React$Node = () => {
-  const demo: DemoType = 'SEARCH_BAR';
+  const demo: DemoType = 'ABTASK';
   return (
     <>
       <StatusBar barStyle="dark-content" />
