@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "flow-bin": "0.92.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
+    "mobx-utils": "^5.5.4",
     "moment-js": "^1.1.15",
     "react": "16.9.0",
     "react-native": "0.61.5",

@@ -6,17 +6,29 @@ import React from 'react';
 
 import ABTasks from './app/ABTasks';
 import LoginScreen from './app/loginScreen';
+import MobxReact from './app/mobxReact';
 import SearchBarScreen from './app/searchBarScreen';
+
+import {observable} from 'mobx';
 
 type DemoType =
   | 'SEARCH_BAR'
   | 'SEARCH_BAR_OBSERVABLE'
   | 'ABTASK'
+  | 'MOBX_REACT'
   | 'LOGIN_FORM';
 import SearchBarObservableScreen from './app/searchBarObservableScreen';
 
+var timerData = observable({
+  secondPassed: 0,
+});
+
+setInterval(() => {
+  timerData.secondPassed++;
+}, 1000);
+
 const App: () => React$Node = () => {
-  const demo: DemoType = 'ABTASK';
+  const demo: DemoType = 'MOBX_REACT';
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -28,6 +40,7 @@ const App: () => React$Node = () => {
           {demo == 'SEARCH_BAR_OBSERVABLE' && <SearchBarObservableScreen />}
           {demo == 'ABTASK' && <ABTasks studentID="1990" classID="classID" />}
           {demo == 'LOGIN_FORM' && <LoginScreen />}
+          {demo == 'MOBX_REACT' && <MobxReact timerData={timerData} />}
         </ScrollView>
       </SafeAreaView>
     </>
